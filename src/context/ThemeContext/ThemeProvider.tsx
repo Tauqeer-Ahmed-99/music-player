@@ -6,7 +6,7 @@ const ThemeProvider = ({
 }: {
   children: JSX.Element | JSX.Element[];
 }) => {
-  const [theme, setTheme] = useState<Theme>(Theme.Dark);
+  const [theme, setTheme] = useState<Theme>(Theme.Business);
 
   const changeTheme = (theme: Theme) => {
     setTheme(theme);
