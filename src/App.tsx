@@ -1,8 +1,12 @@
 import React from "react";
-import ThemeSwitch from "./components/ThemeSwitch/ThemeSwitch";
+import NavBar from "./components/NavBar/NavBar";
 
 function App() {
-  return <ThemeSwitch />;
+  return (
+    <>
+      <NavBar />
+    </>
+  );
 }
 
 export default App;
