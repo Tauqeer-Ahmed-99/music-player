@@ -9,10 +9,11 @@ export enum Theme {
   Corporate = "corporate",
   Synthwave = "synthwave",
   Winter = "winter",
+  Business = "business",
 }
 
 const ThemeContext = createContext({
-  theme: Theme.Dark,
+  theme: Theme.Business,
   changeTheme: (theme: Theme) => {},
 });
 

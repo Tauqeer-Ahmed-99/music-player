@@ -6,7 +6,7 @@ const ThemeSwitch = () => {
 
   const toggleTheme = () => {
     themeContext.changeTheme(
-      themeContext.theme === Theme.Light ? Theme.Dark : Theme.Light
+      themeContext.theme === Theme.Light ? Theme.Business : Theme.Light
     );
   };
 
