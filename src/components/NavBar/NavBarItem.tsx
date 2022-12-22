@@ -1,11 +1,30 @@
 import React, { useContext } from "react";
 import ThemeContext, { Theme } from "../../context/ThemeContext/ThemeContext";
 
-const NavBarItem = ({ icon, label }: { icon: any; label: string }) => {
+import { useNavigate, useLocation } from "react-router-dom";
+
+const NavBarItem = ({
+  icon,
+  label,
+  path,
+}: {
+  icon: string;
+  label: string;
+  path: string;
+}) => {
   const themeContext = useContext(ThemeContext);
+  const navigate = useNavigate();
+  const { pathname } = useLocation();
 
   return (
-    <li className="flex justify-center w-full h-10 pl-4 rounded-md btn-ghost btn hover:cursor-pointer hover:bg-primary">
+    <li
+      onClick={() => {
+        navigate(path);
+      }}
+      className={`flex justify-center w-full h-10 pl-4 mt-2 rounded-md hover:cursor-pointer btn${
+        pathname === path ? " btn-active " : " "
+      } btn-ghost`}
+    >
       <img
         src={icon}
         alt="Icon"
@@ -13,9 +32,9 @@ const NavBarItem = ({ icon, label }: { icon: any; label: string }) => {
         width={55}
         className={`hover:bg-transparent${
           themeContext.theme === Theme.Business ? " invert" : ""
-        } delay-700`}
+        } delay-700 stroke-1 hover:stroke-2`}
       />
-      <span className="flex items-center w-full pl-0 hover:bg-transparent">
+      <span className="flex items-center w-full pl-0 prose-sm prose hover:bg-transparent prose-gray">
         {label}
       </span>
     </li>

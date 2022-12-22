@@ -1,35 +1,8 @@
 import React from "react";
+
 import ThemeSwitch from "../ThemeSwitch/ThemeSwitch";
-
-import HomeIcon from "../../assets/svg/home.svg";
-import RecentlyPlayedIcon from "../../assets/svg/recently-played.svg";
-import CollectionsIcon from "../../assets/svg/collections.svg";
-import PlaylistsIcon from "../../assets/svg/playlists.svg";
-import CreatePlaylistIcon from "../../assets/svg/create-playlist.svg";
 import NavBarItem from "./NavBarItem";
-
-const navBarItems = [
-  {
-    icon: HomeIcon,
-    label: "Home",
-  },
-  {
-    icon: RecentlyPlayedIcon,
-    label: "Recently Played",
-  },
-  {
-    icon: CollectionsIcon,
-    label: "Collections",
-  },
-  {
-    icon: PlaylistsIcon,
-    label: "Playlists",
-  },
-  {
-    icon: CreatePlaylistIcon,
-    label: "Create Playlists",
-  },
-];
+import routes from "../../routes/routes";
 
 const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
   return (
@@ -73,7 +46,10 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
               </div>
             </div>
             <div className="navbar-center">
-              <span className="text-xl normal-case btn btn-ghost">
+              <span className="text-xl normal-case btn btn-ghost md:hidden">
+                Music
+              </span>
+              <span className="items-center justify-center hidden text-xl normal-case btn btn-ghost md:flex">
                 Music Player
               </span>
             </div>
@@ -128,8 +104,8 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
           <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
           <ul className="p-4 w-60 menu bg-base-100 text-base-content">
             {/* { <!-- Sidebar content here -->} */}
-            {navBarItems.map((navBarItem) => (
-              <NavBarItem {...navBarItem} />
+            {routes.map((navBarItem) => (
+              <NavBarItem key={navBarItem.label} {...navBarItem} />
             ))}
           </ul>
         </div>
