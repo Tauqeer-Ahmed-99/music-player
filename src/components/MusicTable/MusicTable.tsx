@@ -23,7 +23,7 @@ const MusicTable = ({
       }`}
     >
       {/* Header */}
-      <div className="flex items-center justify-center w-full h-12">
+      <div className="flex items-center justify-center w-full h-12 px-4">
         <span className="p-1 w-[10%]"></span>
         <span className="p-1 w-[40%]">Title</span>
         <span className="p-1 w-[23.333%] lg:w-[20%] flex items-center justify-center">
@@ -73,7 +73,7 @@ const MusicRow = () => {
   const themeContext = useContext(ThemeContext);
 
   return (
-    <div className="flex items-center justify-center w-full h-16 group hover:bg-gray-500 hover:cursor-pointer hover:rounded-md hover:text-black">
+    <div className="flex items-center justify-center w-full h-20 my-2 btn btn-ghost group hover:cursor-pointer hover:rounded-md">
       <span className="p-1 w-[10%] flex items-center justify-center">
         <button className="btn btn-ghost btn-sm lg:btn-md btn-circle">
           <img

@@ -1,13 +1,15 @@
 import React, { useContext } from "react";
 
 import PlaylistIcon from "../../assets/svg/playlists.svg";
-import ThemeContext from "../../context/ThemeContext/ThemeContext";
+import ThemeContext, { Theme } from "../../context/ThemeContext/ThemeContext";
+
+import MenuIcon from "../../assets/svg/menu.svg";
 
 const PlaylistsScreen = () => {
   const themeContext = useContext(ThemeContext);
   return (
     <div>
-      <div className="flex items-center mb-8">
+      <div className="flex items-center mb-4 ml-4 md:mb-8">
         <img
           src={PlaylistIcon}
           alt="Playlist Icon"
@@ -30,20 +32,29 @@ const PlaylistItem = ({ name }: { name: string }) => {
   const themeContext = useContext(ThemeContext);
   return (
     <div
-      className={`flex items-center p-4 rounded-md hover:cursor-pointer ${
-        themeContext.theme === "business"
-          ? "hover:bg-gray-800"
-          : "hover:bg-slate-300"
-      }  `}
+      className={`flex items-center btn btn-ghost h-12 justify-between my-2 px-2 rounded-md hover:cursor-pointer`}
     >
-      <img
-        src={PlaylistIcon}
-        alt="Playlist Icon"
-        className={`${
-          themeContext.theme === "business" ? "h-12 invert mr-4" : "h-12 mr-4"
-        }`}
-      />
-      <span className="text-xl font-medium">{name}</span>
+      <div className="flex items-center">
+        <img
+          src={PlaylistIcon}
+          alt="Playlist Icon"
+          className={`${
+            themeContext.theme === Theme.Business
+              ? "h-6 invert mr-4"
+              : "h-6 mr-4"
+          }`}
+        />
+        <span className="text-lg font-medium">{name}</span>
+      </div>
+      <button className="btn btn-ghost btn-circle btn-sm">
+        <img
+          src={MenuIcon}
+          alt="Menu"
+          className={`h-4 rotate-90 ${
+            themeContext.theme === "business" ? "invert" : ""
+          }`}
+        />
+      </button>
     </div>
   );
 };
