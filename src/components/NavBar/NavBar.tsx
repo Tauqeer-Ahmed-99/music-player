@@ -89,7 +89,7 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
                       <img
                         src={
                           userContext.user.photoURL ??
-                          `https://avatars.dicebear.com/api/adventurer/${userContext.user.displayName}.svg`
+                          `https://avatars.dicebear.com/api/adventurer/${userContext.user.uid}.svg`
                         }
                         alt="Avatar"
                       />
@@ -101,7 +101,8 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
                   >
                     <li>
                       <span className="justify-between">
-                        {userContext.user.displayName}
+                        {userContext.user.displayName ??
+                          "User " + userContext.user.uid}
                         <span className="badge">Welcome</span>
                       </span>
                     </li>
