@@ -9,7 +9,7 @@ const RecentlyPlayedScreen = () => {
 
   return (
     <>
-      <div className="flex items-center mb-4 ml-4 md:mb-8">
+      <div className="flex items-center px-4 mb-4 ml-4 md:mb-8">
         <img
           src={RecentlyPlayed}
           alt="Create Playlist Icon"

@@ -22,7 +22,7 @@ const PlayingBar = () => {
           min="0"
           max="100"
           value={progress}
-          className={`range range-xs range-info absolute w-[${progress}] top-0 left-0 h-1 m-0 p-0`}
+          className={`range range-xs range-info absolute top-0 left-0 h-1 m-0 p-0`}
         />
         <div className="flex items-center h-full mt-2">
           <img src={DiscIcon} alt="Music Disc" className="h-12 mr-2 invert" />
