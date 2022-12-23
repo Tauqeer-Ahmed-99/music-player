@@ -9,7 +9,7 @@ const PlaylistsScreen = () => {
   const themeContext = useContext(ThemeContext);
   return (
     <div>
-      <div className="flex items-center mb-4 ml-4 md:mb-8">
+      <div className="flex items-center px-4 mb-4 ml-4 md:mb-8">
         <img
           src={PlaylistIcon}
           alt="Playlist Icon"
@@ -32,7 +32,7 @@ const PlaylistItem = ({ name }: { name: string }) => {
   const themeContext = useContext(ThemeContext);
   return (
     <div
-      className={`flex items-center btn btn-ghost h-12 justify-between my-2 px-2 rounded-md hover:cursor-pointer`}
+      className={`flex items-center btn btn-ghost h-12 justify-between my-2 px-8 rounded-md hover:cursor-pointer`}
     >
       <div className="flex items-center">
         <img

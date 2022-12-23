@@ -126,7 +126,7 @@ const UserProvider = ({
         payload: userCredentials.user,
       });
 
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error: any) {
       dispatch({
         type: ACTION_TYPE.CREATE_USER_FAIL,
@@ -151,7 +151,7 @@ const UserProvider = ({
         payload: userCredentials.user,
       });
 
-      navigate("/dashboard");
+      navigate("/home");
     } catch (error: any) {
       dispatch({
         type: ACTION_TYPE.USER_SIGNIN_FAIL,
@@ -187,12 +187,12 @@ const UserProvider = ({
 
         if (user) {
           if (pathname === "/login" || pathname === "/signup") {
-            navigate("/dashboard");
+            navigate("/home");
           } else {
             navigate(pathname);
           }
         } else {
-          if (pathname === "/" || pathname === "/signup") {
+          if (pathname === "/signup") {
             navigate(pathname);
           } else {
             navigate("/login");

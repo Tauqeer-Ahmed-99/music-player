@@ -6,16 +6,19 @@ import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 import reportWebVitals from "./reportWebVitals";
 import ThemeProvider from "./context/ThemeContext/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
+import UserProvider from "./context/UserContext/UserProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
 );
 root.render(
-  <ThemeProvider>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
-  </ThemeProvider>
+  <BrowserRouter>
+    <UserProvider>
+      <ThemeProvider>
+        <App />
+      </ThemeProvider>
+    </UserProvider>
+  </BrowserRouter>
 );
 
 // If you want your app to work offline and load faster, you can change

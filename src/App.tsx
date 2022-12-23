@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import NavBar from "./components/NavBar/NavBar";
 import PlayingBar from "./components/PlayingBar/PlayingBar";
+import UserContext from "./context/UserContext/UserContext";
 import routes from "./routes/routes";
 
 function App() {
+  const userContext = useContext(UserContext);
+
   return (
     <>
       <NavBar>
@@ -14,12 +17,18 @@ function App() {
             <Route
               key={route.path}
               path={route.path}
-              element={<route.component />}
+              element={
+                route.path === "/" ? (
+                  <Navigate to="/login" />
+                ) : (
+                  <route.component />
+                )
+              }
             />
           ))}
         </Routes>
       </NavBar>
-      <PlayingBar />
+      {userContext.user && <PlayingBar />}
     </>
   );
 }

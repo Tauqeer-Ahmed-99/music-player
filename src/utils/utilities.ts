@@ -21,3 +21,7 @@ export const wallpapers = [
 export const generateRandomNumber = (maxLimit = 10) => {
   return Math.floor(Math.random() * maxLimit);
 };
+
+export const emailRegex = new RegExp(
+  /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+);

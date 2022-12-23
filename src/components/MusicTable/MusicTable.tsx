@@ -8,7 +8,7 @@ import MusicDisc from "../../assets/images/music-disc.png";
 import ShareIcon from "../../assets/svg/share.svg";
 import UploadIcon from "../../assets/svg/upload.svg";
 import MenuIcon from "../../assets/svg/menu.svg";
-import ThemeContext from "../../context/ThemeContext/ThemeContext";
+import ThemeContext, { Theme } from "../../context/ThemeContext/ThemeContext";
 
 const MusicTable = ({
   onRecentlyPlayedScreen,
@@ -31,7 +31,7 @@ const MusicTable = ({
             src={MusicIcon}
             alt="Composer"
             className={`h-4 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </span>
@@ -40,7 +40,7 @@ const MusicTable = ({
             src={EyeIcon}
             alt="Views"
             className={`h-5 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </span>
@@ -49,7 +49,7 @@ const MusicTable = ({
             src={HistoryIcon}
             alt="Time"
             className={`h-4 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </span>
@@ -59,8 +59,8 @@ const MusicTable = ({
       </div>
       {/* Rows */}
       <div className="h-[calc(100%-3rem)] overflow-x-auto no-scrollbar pb-16">
-        {[...new Array(20)].map((music) => (
-          <MusicRow />
+        {[...new Array(20)].map((music, index) => (
+          <MusicRow key={index} />
         ))}
       </div>
     </div>
@@ -79,7 +79,7 @@ const MusicRow = () => {
           <img
             src={PlayIcon}
             className={`h-4 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
             alt="Play"
           />
@@ -90,7 +90,7 @@ const MusicRow = () => {
           src={MusicDisc}
           alt="Album"
           className={`hidden w-16 h-16 mr-2 md:flex ${
-            themeContext.theme === "business" ? "invert" : ""
+            themeContext.theme === Theme.Business ? "invert" : ""
           }`}
         />
         <div className="flex flex-col">
@@ -113,7 +113,7 @@ const MusicRow = () => {
             src={ShareIcon}
             alt="Share"
             className={`h-4 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </button>
@@ -124,7 +124,7 @@ const MusicRow = () => {
             src={UploadIcon}
             alt="Upload"
             className={`h-4 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </button>
@@ -135,7 +135,7 @@ const MusicRow = () => {
             src={MenuIcon}
             alt="Menu"
             className={`h-4 rotate-90 ${
-              themeContext.theme === "business" ? "invert" : ""
+              themeContext.theme === Theme.Business ? "invert" : ""
             }`}
           />
         </button>
