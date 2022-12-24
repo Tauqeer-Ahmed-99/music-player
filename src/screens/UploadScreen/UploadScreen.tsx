@@ -72,7 +72,7 @@ const UploadScreen = () => {
           </span>
           <input
             type="file"
-            className={`block w-full h-12 p-2 mt-1 ${
+            className={`block file-input w-full h-12  mt-1 ${
               themeContext.theme === Theme.Business
                 ? "bg-gray-700"
                 : "bg-gray-100 focus:bg-white"
