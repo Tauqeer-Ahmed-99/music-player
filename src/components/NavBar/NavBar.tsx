@@ -100,7 +100,7 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
                     className="p-2 mt-3 shadow menu menu-compact dropdown-content bg-base-100 rounded-box w-52"
                   >
                     <li>
-                      <span className="justify-between">
+                      <span className="flex-col items-start justify-center break-all">
                         {userContext.user.displayName ??
                           "User " + userContext.user.uid}
                         <span className="badge">Welcome</span>
