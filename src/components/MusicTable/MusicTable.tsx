@@ -4,6 +4,7 @@ import MusicIcon from "../../assets/svg/music.svg";
 import EyeIcon from "../../assets/svg/eye.svg";
 import HistoryIcon from "../../assets/svg/clock.svg";
 import PlayIcon from "../../assets/svg/play.svg";
+import PauseIcon from "../../assets/svg/pause.svg";
 import MusicDisc from "../../assets/images/music-disc.png";
 import ShareIcon from "../../assets/svg/share.svg";
 import UploadIcon from "../../assets/svg/upload.svg";
@@ -110,6 +111,8 @@ const MusicRow = ({
     } else {
       musicContext.addToRecentlyPlayed(audioFile);
     }
+
+    musicContext.changeAudio(audioFile);
   };
 
   const handleAddToPlaylistClick = (playlist: IPlaylist) => {
@@ -124,15 +127,31 @@ const MusicRow = ({
     musicContext.removeFromPlaylist(playlist, audioFile);
   };
 
+  const handlePlayPauseButtonClick = (event: any) => {
+    event.stopPropagation();
+    musicContext.togglePlay(!musicContext.isAudioPlaying);
+    if (musicContext.currentAudio?.id !== audioFile.id) {
+      musicContext.changeAudio(audioFile);
+    }
+  };
+
   return (
     <div
       className="flex items-center justify-center w-full h-20 my-2 btn-ghost group hover:cursor-pointer hover:rounded-md"
       onClick={handleMusicRowClick}
     >
       <span className="p-1 w-[10%] flex items-center justify-center">
-        <button className="btn btn-ghost btn-sm lg:btn-md btn-circle">
+        <button
+          className="btn btn-ghost btn-sm lg:btn-md btn-circle"
+          onClick={handlePlayPauseButtonClick}
+        >
           <img
-            src={PlayIcon}
+            src={
+              musicContext.currentAudio?.id === audioFile.id &&
+              musicContext.isAudioPlaying
+                ? PauseIcon
+                : PlayIcon
+            }
             className={`h-4 ${
               themeContext.theme === Theme.Business ? "invert" : ""
             }`}

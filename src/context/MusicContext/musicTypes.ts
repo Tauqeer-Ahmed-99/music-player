@@ -53,6 +53,8 @@ export interface IPlaylist {
 export type Progress = number;
 
 export interface IInitialContext {
+  currentAudio: IAudioFile | null;
+  isAudioPlaying: boolean;
   recentlyPlayed: IPlaylist | null;
   playlists: IPlaylist[] | null;
   uploadedPlaylist: IPlaylist | null;
@@ -72,12 +74,16 @@ export interface IInitialContext {
   createPlaylist: (playlistName: string, playlistComposer: string) => void;
   deletePlaylist: (playlist: IPlaylist) => void;
   getUserMusicData: (uid?: string, authToken?: string) => void;
+  changeAudio: (audioFile: IAudioFile) => void;
+  togglePlay: (isPlaying: boolean) => void;
 }
 
 export interface IPayload {
   recentlyPlayedPlaylist?: IPlaylist;
   playlists?: IPlaylist[];
   uploadedPlaylist?: IPlaylist;
+  currentAudio?: IAudioFile;
+  isAudioPlaying?: boolean;
 }
 
 export interface IMusicAction {
@@ -88,6 +94,8 @@ export interface IMusicAction {
 }
 
 export interface IMusicState {
+  currentAudio: IAudioFile | null;
+  isAudioPlaying: boolean;
   recentlyPlayed: IPlaylist | null;
   playlists: IPlaylist[] | null;
   uploadedPlaylist: IPlaylist | null;
@@ -125,6 +133,8 @@ export enum MusicActions {
   ADD_RECENTLY_PLAYED_SUCCESS = "ADD_RECENTLY_PLAYED_SUCCESS",
   ADD_RECENTLY_PLAYED_FAIL = "ADD_RECENTLY_PLAYED_FAIL",
   CLOSE_FILE_ERROR_DIALOG = "CLOSE_FILE_ERROR_DIALOG",
+  CHANGE_AUDIO_FILE = "CHANGE_AUDIO_FILE",
+  TOGGLE_PLAY = "TOGGLE_PLAY",
 }
 
 export enum DefaultPlaylists {

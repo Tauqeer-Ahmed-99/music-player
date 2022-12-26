@@ -2,6 +2,8 @@ import { createContext } from "react";
 import { IAudioFile, IInitialContext, IPlaylist } from "./musicTypes";
 
 const initialContext: IInitialContext = {
+  currentAudio: null,
+  isAudioPlaying: false,
   recentlyPlayed: null,
   playlists: null,
   uploadedPlaylist: null,
@@ -21,6 +23,8 @@ const initialContext: IInitialContext = {
   createPlaylist: (playlistName: string, playlistComposer: string) => {},
   deletePlaylist: (playlist: IPlaylist) => {},
   getUserMusicData: () => {},
+  changeAudio: (audioFile: IAudioFile) => {},
+  togglePlay: (isPlaying: boolean) => {},
 };
 
 const MusicContext = createContext(initialContext);

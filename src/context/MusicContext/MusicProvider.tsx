@@ -16,6 +16,8 @@ import {
 import UserContext from "../UserContext/UserContext";
 
 const initialState: IMusicState = {
+  currentAudio: null,
+  isAudioPlaying: false,
   recentlyPlayed: null,
   playlists: null,
   uploadedPlaylist: null,
@@ -173,6 +175,14 @@ const musicReducer = (
         isError: true,
         errorMessage: error.message,
       };
+    case MusicActions.CHANGE_AUDIO_FILE:
+      return {
+        ...state,
+        currentAudio: payload?.currentAudio as IAudioFile,
+        isAudioPlaying: true,
+      };
+    case MusicActions.TOGGLE_PLAY:
+      return { ...state, isAudioPlaying: payload?.isAudioPlaying as boolean };
     default:
       return state;
   }
@@ -653,7 +663,23 @@ const MusicProvider = ({ children }: { children: React.ReactNode }) => {
     }
   };
 
+  const changeAudio = (audioFile: IAudioFile) => {
+    dispatch({
+      type: MusicActions.CHANGE_AUDIO_FILE,
+      payload: { currentAudio: audioFile },
+    });
+  };
+
+  const togglePlay = (isPlaying: boolean) => {
+    dispatch({
+      type: MusicActions.TOGGLE_PLAY,
+      payload: { isAudioPlaying: isPlaying },
+    });
+  };
+
   const context = {
+    currentAudio: musicState.currentAudio,
+    isAudioPlaying: musicState.isAudioPlaying,
     recentlyPlayed: musicState.recentlyPlayed,
     playlists: musicState.playlists,
     uploadedPlaylist: musicState.uploadedPlaylist,
@@ -669,6 +695,8 @@ const MusicProvider = ({ children }: { children: React.ReactNode }) => {
     createPlaylist,
     deletePlaylist,
     getUserMusicData,
+    changeAudio,
+    togglePlay,
   };
 
   return (
