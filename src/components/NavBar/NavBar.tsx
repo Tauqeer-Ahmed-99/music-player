@@ -130,6 +130,7 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
                   (route) =>
                     route.path !== "/login" &&
                     route.path !== "/signup" &&
+                    route.path !== "/*" &&
                     route.path !== "/"
                 )
                 .map((navBarItem) => (
