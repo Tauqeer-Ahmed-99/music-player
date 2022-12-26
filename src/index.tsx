@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import ThemeProvider from "./context/ThemeContext/ThemeProvider";
 import { BrowserRouter } from "react-router-dom";
 import UserProvider from "./context/UserContext/UserProvider";
+import MusicProvider from "./context/MusicContext/MusicProvider";
 
 const root = ReactDOM.createRoot(
   document.getElementById("root") as HTMLElement
@@ -15,7 +16,9 @@ root.render(
   <BrowserRouter>
     <UserProvider>
       <ThemeProvider>
-        <App />
+        <MusicProvider>
+          <App />
+        </MusicProvider>
       </ThemeProvider>
     </UserProvider>
   </BrowserRouter>

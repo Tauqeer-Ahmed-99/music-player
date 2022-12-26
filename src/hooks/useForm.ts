@@ -1,13 +1,13 @@
 import React, { useState, useCallback, useEffect } from "react";
 
-export type FieldValue = string | File | boolean;
+export type FieldValue = string | FileList | boolean;
 type ObjectOfFormValuesWhereKeyNamesMatchedWithInputFieldNames = {
   [key: string]: {
-    value: string | boolean;
+    value: string | boolean | null | FileList;
     validate: (fieldValue: FieldValue) => boolean;
   };
 };
-type FormValues = { [key: string]: string | boolean };
+type FormValues = { [key: string]: string | boolean | FileList };
 type FormErrors = { [key: string]: boolean };
 type InputOnChangeFunction = (
   event: React.ChangeEvent<HTMLInputElement>
@@ -85,6 +85,14 @@ const useForm = (
           validate: prevValues[event.target.name].validate,
         },
       }));
+    } else if (event.target.type === "file") {
+      setFormValues((prevValues) => ({
+        ...prevValues,
+        [event.target.name]: {
+          value: event.target.files as FileList,
+          validate: prevValues[event.target.name].validate,
+        },
+      }));
     } else {
       setFormValues((prevValues) => ({
         ...prevValues,
@@ -110,7 +118,9 @@ const useForm = (
   const validateFormFunction = () => {
     const errors: boolean[] = [];
     for (const fieldName in values) {
-      const fieldError = values[fieldName].validate(values[fieldName].value);
+      const fieldError = values[fieldName].validate(
+        values[fieldName].value as FieldValue
+      );
       setFieldErrors((prevValues) => ({
         ...prevValues,
         [fieldName]: fieldError,
@@ -133,7 +143,7 @@ const useForm = (
   const formValues: FormValues = {};
 
   for (const field in values) {
-    formValues[field] = values[field].value;
+    formValues[field] = values[field].value as FieldValue;
   }
 
   return [

@@ -6,10 +6,13 @@ import useForm, { FieldValue } from "../../hooks/useForm";
 import { emailRegex } from "../../utils/utilities";
 import UserContext from "../../context/UserContext/UserContext";
 import Dialog from "../../components/Dialog/Dialog";
+import MusicContext from "../../context/MusicContext/MusicContext";
 
 const SignupScreen = () => {
   const themeContext = useContext(ThemeContext);
+
   const userContext = useContext(UserContext);
+  const musicContext = useContext(MusicContext);
 
   const navigate = useNavigate();
 
@@ -43,17 +46,20 @@ const SignupScreen = () => {
     validateForm,
   ] = useForm(initialValues);
 
-  const handleRegisterClick = () => {
+  const handleRegisterClick = async () => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      userContext.createAccount(
+      await userContext.createAccount(
         fieldValues.email as string,
         fieldValues.password as string,
         ((fieldValues.firstName as string) +
           " " +
-          fieldValues.lastName) as string
+          fieldValues.lastName) as string,
+        musicContext.getUserMusicData
       );
+      console.log(userContext.user?.uid);
+      // musicContext.getUserMusicData();
     }
   };
 

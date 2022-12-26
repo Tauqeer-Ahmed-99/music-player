@@ -21,7 +21,7 @@ const PlayingBar = () => {
           type="range"
           min="0"
           max="100"
-          value={progress}
+          defaultValue={progress}
           className={`range range-xs range-info absolute top-0 left-0 h-1 m-0 p-0`}
         />
         <div className="flex items-center h-full mt-2">
@@ -87,7 +87,7 @@ const PlayingBar = () => {
             type="range"
             min="0"
             max="100"
-            value={progress}
+            defaultValue={progress}
             className={`range range-xs range-info w-96 mx-4`}
           />
           <span className="mr-8 text-xs text-white">{totalTime}</span>

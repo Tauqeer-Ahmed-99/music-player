@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useReducer } from "react";
 import UserContext from "./UserContext";
-import auth from "../../firebase";
+import { auth } from "../../firebase";
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
@@ -108,7 +108,8 @@ const UserProvider = ({
   const createAccount = async (
     email: string,
     password: string,
-    displayName: string
+    displayName: string,
+    getUserMusicData: (uid?: string, authToken?: string) => void
   ) => {
     try {
       dispatch({ type: ACTION_TYPE.CREATE_USER_START, payload: null });
@@ -119,15 +120,47 @@ const UserProvider = ({
         password
       );
 
-      await updateProfile(user.user as User, { displayName });
+      await updateProfile(userCredentials.user, { displayName });
+
+      const token = await userCredentials.user.getIdToken();
+
+      const uploadPlaylistGenesis = {
+        playlistName: "Upload Playlist",
+        createdAt: new Date().toISOString(),
+        owner: userCredentials.user?.displayName,
+      };
+
+      await fetch(
+        `https://play-it-music-player-default-rtdb.firebaseio.com/files/${userCredentials.user?.uid}.json?auth=${token}`,
+        {
+          method: "POST",
+          body: JSON.stringify(uploadPlaylistGenesis),
+        }
+      );
+      const recentlyPlayedGenesis = {
+        playlistName: "Recently Played Playlist",
+        createdAt: new Date().toISOString(),
+        owner: userCredentials.user?.displayName,
+      };
+
+      await fetch(
+        `https://play-it-music-player-default-rtdb.firebaseio.com/files/${userCredentials.user?.uid}.json?auth=${token}`,
+        {
+          method: "POST",
+          body: JSON.stringify(recentlyPlayedGenesis),
+        }
+      );
 
       dispatch({
         type: ACTION_TYPE.CREATE_USER_SUCCESS,
         payload: userCredentials.user,
       });
 
+      getUserMusicData(userCredentials.user.uid, token);
+
       navigate("/home");
     } catch (error: any) {
+      console.log(error);
       dispatch({
         type: ACTION_TYPE.CREATE_USER_FAIL,
         payload: null,
@@ -153,6 +186,7 @@ const UserProvider = ({
 
       navigate("/home");
     } catch (error: any) {
+      console.log(error);
       dispatch({
         type: ACTION_TYPE.USER_SIGNIN_FAIL,
         payload: null,
@@ -200,15 +234,14 @@ const UserProvider = ({
         }
       });
     } catch (error: any) {
+      console.log(error);
       dispatch({ type: ACTION_TYPE.USER_LOAD_FAIL, payload: null, error });
     }
   }, [navigate, pathname]);
 
   useEffect(() => {
-    const loadExistingUser = async () => {
-      await loadUser();
-    };
-    loadExistingUser();
+    loadUser();
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

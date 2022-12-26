@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 
 import { generateRandomNumber, wallpapers } from "../../utils/utilities";
 import PlayIcon from "../../assets/svg/play.svg";
 import ShareIcon from "../../assets/svg/share.svg";
 import UploadIcon from "../../assets/svg/upload.svg";
 import MusicTable from "../../components/MusicTable/MusicTable";
+import MusicContext from "../../context/MusicContext/MusicContext";
+import { IAudioFile } from "../../context/MusicContext/musicTypes";
 
 const HomeScreen = () => {
   const randomIndex = generateRandomNumber(wallpapers.length);
+
+  const musicContext = useContext(MusicContext);
+
+  console.log(musicContext);
 
   return (
     <>
@@ -29,7 +35,12 @@ const HomeScreen = () => {
           </button>
         </div>
       </div>
-      <MusicTable />
+      {musicContext.uploadedPlaylist?.audioFiles && (
+        <MusicTable
+          onHomeScreen
+          audioFiles={musicContext.uploadedPlaylist?.audioFiles as IAudioFile[]}
+        />
+      )}
     </>
   );
 };

@@ -3,9 +3,13 @@ import MusicTable from "../../components/MusicTable/MusicTable";
 
 import RecentlyPlayed from "../../assets/svg/recently-played.svg";
 import ThemeContext, { Theme } from "../../context/ThemeContext/ThemeContext";
+import MusicContext from "../../context/MusicContext/MusicContext";
+import { IAudioFile } from "../../context/MusicContext/musicTypes";
 
 const RecentlyPlayedScreen = () => {
   const themeContext = useContext(ThemeContext);
+
+  const musicContext = useContext(MusicContext);
 
   return (
     <>
@@ -21,7 +25,16 @@ const RecentlyPlayedScreen = () => {
         />
         <span className="font-medium">Recently Played</span>
       </div>
-      <MusicTable onRecentlyPlayedScreen />
+
+      {musicContext?.recentlyPlayed &&
+        musicContext?.recentlyPlayed?.audioFiles && (
+          <MusicTable
+            onRecentlyPlayedScreen
+            audioFiles={
+              musicContext?.recentlyPlayed?.audioFiles as IAudioFile[]
+            }
+          />
+        )}
     </>
   );
 };

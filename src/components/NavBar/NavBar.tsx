@@ -118,7 +118,7 @@ const NavBar = ({ children }: { children?: JSX.Element | JSX.Element[] }) => {
             </div>
           </div>
           {/* { <!-- Page content here -->} */}
-          <div className="w-full h-screen pt-16">{children}</div>
+          <div className="w-full h-screen pt-16 no-scrollbar">{children}</div>
         </div>
         {userContext.user && (
           <div className="mt-16 drawer-side">

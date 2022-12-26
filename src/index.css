@@ -25,3 +25,21 @@
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
 }
+
+@keyframes slide {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100%;
+  }
+}
+
+@-webkit-keyframes slide {
+  from {
+    left: 100%;
+  }
+  to {
+    left: -100%;
+  }
+}

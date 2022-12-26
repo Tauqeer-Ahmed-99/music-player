@@ -7,7 +7,12 @@ export interface IUserContext {
   isError: boolean;
   message: string;
   errorMessage: string;
-  createAccount: (email: string, password: string, displayName: string) => void;
+  createAccount: (
+    email: string,
+    password: string,
+    displayName: string,
+    getUserMusicData: (uid?: string, authToken?: string) => void
+  ) => Promise<void>;
   signin: (email: string, password: string) => void;
   signout: () => void;
   closeErrorDialog: () => void;
@@ -19,7 +24,12 @@ const initialContext: IUserContext = {
   isError: false,
   message: "No Message.",
   errorMessage: "No Error Message.",
-  createAccount: (email: string, password: string, displayName: string) => {},
+  createAccount: async (
+    email: string,
+    password: string,
+    displayName: string,
+    getMusicData: (uid: string) => void
+  ) => {},
   signin: (email: string, password: string) => {},
   signout: () => {},
   closeErrorDialog: () => {},
