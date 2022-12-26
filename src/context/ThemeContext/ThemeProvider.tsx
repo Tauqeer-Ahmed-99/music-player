@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ThemeContext, { Theme } from "./ThemeContext";
 
 const ThemeProvider = ({
@@ -10,7 +10,15 @@ const ThemeProvider = ({
 
   const changeTheme = (theme: Theme) => {
     setTheme(theme);
+    localStorage.setItem("theme", JSON.stringify(theme));
   };
+
+  useEffect(() => {
+    const themeFromLocalStorage = localStorage.getItem("theme");
+    if (themeFromLocalStorage) {
+      setTheme(themeFromLocalStorage as Theme);
+    }
+  }, []);
 
   const context = {
     theme,
