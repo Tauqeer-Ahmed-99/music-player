@@ -6,6 +6,7 @@ import RecentlyPlayedScreen from "../screens/RecentlyPlayedScreen/RecentlyPlayed
 import UploadScreen from "../screens/UploadScreen/UploadScreen";
 import LoginScreen from "../screens/LoginScreen/LoginScreen";
 import SignupScreen from "../screens/SignupScreen/SignupScreen";
+import PageNotFoundScreen from "../screens/PageNotFoundScreen/PageNotFoundScreen";
 
 import HomeIcon from "../assets/svg/home.svg";
 import RecentlyPlayedIcon from "../assets/svg/recently-played.svg";
@@ -69,6 +70,12 @@ const routes = [
     label: "Login",
     path: "/login",
     component: LoginScreen,
+  },
+  {
+    icon: SignupIcon,
+    label: "Page Not Found",
+    path: "/*",
+    component: PageNotFoundScreen,
   },
 ];
 

@@ -4,6 +4,7 @@ import MusicIcon from "../../assets/svg/music.svg";
 import EyeIcon from "../../assets/svg/eye.svg";
 import HistoryIcon from "../../assets/svg/clock.svg";
 import PlayIcon from "../../assets/svg/play.svg";
+import PauseIcon from "../../assets/svg/pause.svg";
 import MusicDisc from "../../assets/images/music-disc.png";
 import ShareIcon from "../../assets/svg/share.svg";
 import UploadIcon from "../../assets/svg/upload.svg";
@@ -43,7 +44,7 @@ const MusicTable = ({
             }`}
           />
         </span>
-        <span className="p-1 w-[13.333%] lg:w-[10%] flex items-center justify-center">
+        <span className="p-1 w-[13.333%] lg:w-[10%] hidden lg:flex items-center justify-center">
           <img
             src={EyeIcon}
             alt="Views"
@@ -63,7 +64,7 @@ const MusicTable = ({
         </span>
         <span className="p-1 w-[3.333%] hidden lg:flex"></span>
         <span className="p-1 w-[3.333%] hidden lg:flex"></span>
-        <span className="p-1 w-[3.3%] hidden lg:flex"></span>
+        <span className="p-1 w-[3.3%] flex"></span>
       </div>
       {/* Rows */}
       <div className="h-[calc(100%-3rem)] overflow-x-auto no-scrollbar pb-16">
@@ -110,6 +111,8 @@ const MusicRow = ({
     } else {
       musicContext.addToRecentlyPlayed(audioFile);
     }
+
+    musicContext.changeAudio(audioFile);
   };
 
   const handleAddToPlaylistClick = (playlist: IPlaylist) => {
@@ -124,15 +127,31 @@ const MusicRow = ({
     musicContext.removeFromPlaylist(playlist, audioFile);
   };
 
+  const handlePlayPauseButtonClick = (event: any) => {
+    event.stopPropagation();
+    musicContext.togglePlay(!musicContext.isAudioPlaying);
+    if (musicContext.currentAudio?.id !== audioFile.id) {
+      musicContext.changeAudio(audioFile);
+    }
+  };
+
   return (
     <div
       className="flex items-center justify-center w-full h-20 my-2 btn-ghost group hover:cursor-pointer hover:rounded-md"
       onClick={handleMusicRowClick}
     >
       <span className="p-1 w-[10%] flex items-center justify-center">
-        <button className="btn btn-ghost btn-sm lg:btn-md btn-circle">
+        <button
+          className="btn btn-ghost btn-sm lg:btn-md btn-circle"
+          onClick={handlePlayPauseButtonClick}
+        >
           <img
-            src={PlayIcon}
+            src={
+              musicContext.currentAudio?.id === audioFile.id &&
+              musicContext.isAudioPlaying
+                ? PauseIcon
+                : PlayIcon
+            }
             className={`h-4 ${
               themeContext.theme === Theme.Business ? "invert" : ""
             }`}
@@ -156,7 +175,7 @@ const MusicRow = ({
       <span className="p-1 w-[23.333%] lg:w-[20%] flex items-center justify-center text-xs truncate">
         {audioFile.composerName ?? "Unknown"}
       </span>
-      <span className="p-1 w-[13.333%] lg:w-[10%] flex items-center justify-center text-xs truncate">
+      <span className="p-1 w-[13.333%] lg:w-[10%] hidden lg:flex items-center justify-center text-xs truncate">
         -
       </span>
       <span className="p-1 w-[13.3%] lg:w-[10%] flex items-center justify-center text-xs truncate">
@@ -184,7 +203,7 @@ const MusicRow = ({
           />
         </button>
       </span>
-      <span className="p-1 w-[3.3%] hidden lg:flex dropdown dropdown-end">
+      <span className="p-1 w-[3.3%] flex dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-sm btn-circle btn-ghost">
           <img
             src={MenuIcon}
