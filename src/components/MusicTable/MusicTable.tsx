@@ -43,7 +43,7 @@ const MusicTable = ({
             }`}
           />
         </span>
-        <span className="p-1 w-[13.333%] lg:w-[10%] flex items-center justify-center">
+        <span className="p-1 w-[13.333%] lg:w-[10%] hidden lg:flex items-center justify-center">
           <img
             src={EyeIcon}
             alt="Views"
@@ -63,7 +63,7 @@ const MusicTable = ({
         </span>
         <span className="p-1 w-[3.333%] hidden lg:flex"></span>
         <span className="p-1 w-[3.333%] hidden lg:flex"></span>
-        <span className="p-1 w-[3.3%] hidden lg:flex"></span>
+        <span className="p-1 w-[3.3%] flex"></span>
       </div>
       {/* Rows */}
       <div className="h-[calc(100%-3rem)] overflow-x-auto no-scrollbar pb-16">
@@ -156,7 +156,7 @@ const MusicRow = ({
       <span className="p-1 w-[23.333%] lg:w-[20%] flex items-center justify-center text-xs truncate">
         {audioFile.composerName ?? "Unknown"}
       </span>
-      <span className="p-1 w-[13.333%] lg:w-[10%] flex items-center justify-center text-xs truncate">
+      <span className="p-1 w-[13.333%] lg:w-[10%] hidden lg:flex items-center justify-center text-xs truncate">
         -
       </span>
       <span className="p-1 w-[13.3%] lg:w-[10%] flex items-center justify-center text-xs truncate">
@@ -184,7 +184,7 @@ const MusicRow = ({
           />
         </button>
       </span>
-      <span className="p-1 w-[3.3%] hidden lg:flex dropdown dropdown-end">
+      <span className="p-1 w-[3.3%] flex dropdown dropdown-end">
         <label tabIndex={0} className="btn btn-sm btn-circle btn-ghost">
           <img
             src={MenuIcon}
