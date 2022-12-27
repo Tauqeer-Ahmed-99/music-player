@@ -1,4 +1,4 @@
-import React, { useContext, useMemo } from "react";
+import React, { useContext, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import Dialog from "../../components/Dialog/Dialog";
 
@@ -45,6 +45,13 @@ const LoginScreen = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (userContext.user) {
+      navigate("/home");
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
