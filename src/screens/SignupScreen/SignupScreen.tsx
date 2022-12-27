@@ -58,7 +58,6 @@ const SignupScreen = () => {
           fieldValues.lastName) as string,
         musicContext.getUserMusicData
       );
-      console.log(userContext.user?.uid);
       // musicContext.getUserMusicData();
     }
   };

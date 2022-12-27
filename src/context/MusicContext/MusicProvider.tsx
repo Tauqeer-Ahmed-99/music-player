@@ -402,8 +402,6 @@ const MusicProvider = ({ children }: { children: React.ReactNode }) => {
   const parseData = async (data: Response) => {
     const parsedData: IPlaylistRawResponse = await data.json();
 
-    console.log(parsedData);
-
     const parsedArray = Object.entries(parsedData).map((item) => ({
       ...item[1],
       id: item[0],
@@ -444,8 +442,6 @@ const MusicProvider = ({ children }: { children: React.ReactNode }) => {
         playlist.playlistName !== DefaultPlaylists.Recently_Played_Playlist
       );
     });
-
-    console.log(uploadedPlaylist, recentlyPlayedPlaylist, playlists);
 
     return { playlists, uploadedPlaylist, recentlyPlayedPlaylist };
   };

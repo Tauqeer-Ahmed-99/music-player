@@ -13,8 +13,6 @@ const HomeScreen = () => {
 
   const musicContext = useContext(MusicContext);
 
-  console.log(musicContext);
-
   return (
     <>
       <div className="relative w-full h-1/3 md:h-1/2">

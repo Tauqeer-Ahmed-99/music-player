@@ -8,9 +8,9 @@ import RepeatIcon from "../../assets/svg/repeat.svg";
 import ShuffleIcon from "../../assets/svg/shuffle.svg";
 import MusicContext from "../../context/MusicContext/MusicContext";
 import {
-  DefaultPlaylists,
+  // DefaultPlaylists,
   IAudioFile,
-  IPlaylist,
+  // IPlaylist,
 } from "../../context/MusicContext/musicTypes";
 
 const PlayingBar = () => {
@@ -101,39 +101,40 @@ const PlayingBar = () => {
   };
 
   const handlePlaybackEnd = () => {
-    console.log("ss");
-    const currentPlaylistName = musicContext.currentAudio?.playlistName;
-    const currentPlayist: IPlaylist =
-      currentPlaylistName === DefaultPlaylists.Upload_Playlist
-        ? (musicContext.uploadedPlaylist as IPlaylist)
-        : currentPlaylistName === DefaultPlaylists.Recently_Played_Playlist
-        ? (musicContext.recentlyPlayed as IPlaylist)
-        : ((musicContext.playlists as IPlaylist[]).find(
-            (playlist) => playlist.playlistName === currentPlaylistName
-          ) as IPlaylist);
+    // const currentPlaylistName = musicContext.currentAudio?.playlistName;
+    // const currentPlayist: IPlaylist =
+    //   currentPlaylistName === DefaultPlaylists.Upload_Playlist
+    //     ? (musicContext.uploadedPlaylist as IPlaylist)
+    //     : currentPlaylistName === DefaultPlaylists.Recently_Played_Playlist
+    //     ? (musicContext.recentlyPlayed as IPlaylist)
+    //     : ((musicContext.playlists as IPlaylist[]).find(
+    //         (playlist) => playlist.playlistName === currentPlaylistName
+    //       ) as IPlaylist);
 
-    const currentAudioIndex = currentPlayist.audioFiles.findIndex(
-      (audio) => audio.id === musicContext.currentAudio?.id
-    );
+    // const currentAudioIndex = currentPlayist.audioFiles.findIndex(
+    //   (audio) => audio.id === musicContext.currentAudio?.id
+    // );
 
-    console.log(currentPlaylistName, currentPlayist, currentAudioIndex);
-
-    if (
-      currentAudioIndex > -1 &&
-      currentAudioIndex + 1 < currentPlayist.audioFiles.length - 1
-    ) {
-      musicContext.changeAudio(
-        currentPlayist.audioFiles[currentAudioIndex + 1]
-      );
-    } else {
-      console.log(currentPlayist.audioFiles[0]);
-      if (currentPlayist.audioFiles[0]) {
-        musicContext.changeAudio(currentPlayist.audioFiles[0]);
-      } else {
-        musicContext.togglePlay(false);
-      }
-    }
+    // if (
+    //   currentAudioIndex > -1 &&
+    //   currentAudioIndex + 1 < currentPlayist.audioFiles.length - 1
+    // ) {
+    //   musicContext.changeAudio(
+    //     currentPlayist.audioFiles[currentAudioIndex + 1]
+    //   );
+    // } else {
+    //   if (currentPlayist.audioFiles[0]) {
+    //     musicContext.changeAudio(currentPlayist.audioFiles[0]);
+    //   } else {
+    //     musicContext.togglePlay(false);
+    //   }
+    // }
+    musicContext.togglePlay(false);
   };
+
+  // const handleChange = (event: any) => {
+  //   event.target.currentTime = 0;
+  // };
 
   return (
     <>
@@ -143,6 +144,7 @@ const PlayingBar = () => {
         onTimeUpdate={handleTimeUpdate}
         onLoadedMetadata={handleOnMetaDataLoaded}
         onEnded={handlePlaybackEnd}
+        // onChange={handleChange}
       />
       {/* Small Screen */}
       <div className="fixed bottom-0 left-0 z-[100] flex items-center justify-between w-screen p-1 bg-gray-900 lg:hidden">
